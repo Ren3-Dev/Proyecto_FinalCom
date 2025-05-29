@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Compilador Kevin</title>
+  <h1>August_Dev_005</h1>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Compilador BMLang</h1>
+  <form id="formulario" enctype="multipart/form-data">
+    <input type="file" name="archivo" accept=".ml" required>
+    <button type="submit">Compilar</button>
+  </form>
+  <pre id="salida"></pre>
+
+  <script>
+    document.getElementById('formulario').onsubmit = async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const res = await fetch('/compilar', {
+        method: 'POST',
+        body: formData
+      });
+      const texto = await res.text();
+      document.getElementById('salida').textContent = texto;
+    };
+  </script>
+</body>
+</html>

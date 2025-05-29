@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.o
+*.out
+*.log
+lex.yy.c
+parser.tab.*
+uploads/
+Poyecto_FinalCom
