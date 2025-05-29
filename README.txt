@@ -17,7 +17,7 @@ sudo apt install flex bison gcc make python3-venv
 🚀 Cómo ejecutar el proyecto
 
 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/Proyecto_FinalCom.git
+git clone https://github.com/Ren3-Dev/Proyecto_FinalCom.git
 cd Proyecto_FinalCom
 
 2. Crear y activar el entorno virtual
