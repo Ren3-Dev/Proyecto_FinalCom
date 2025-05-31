@@ -4,18 +4,20 @@ body {
   color: #afe3ff;
   text-align: center;
   padding: 20px;
+  margin: 0;
 }
 
 h1 {
   color: #90FF5D;
+  margin-bottom: 30px;
 }
 
-form {
+form, .editor-container {
   background-color: #0034c3;
   padding: 20px;
   border-radius: 10px;
   display: inline-block;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 input[type="file"] {
@@ -27,6 +29,20 @@ input[type="file"] {
   border-radius: 5px;
 }
 
+textarea#editor {
+  width: 90%;
+  height: 300px;
+  background-color: #001e66;
+  color: #afe3ff;
+  border: 1px solid #90FF5D;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
 button {
   padding: 10px 20px;
   background-color: #90FF5D;
@@ -35,23 +51,24 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 10px;
+  margin: 5px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #76e64f;
 }
 
-pre {
+pre#salida {
   background-color: #001e66;
   padding: 20px;
   text-align: left;
   white-space: pre-wrap;
-  max-width: 800px;
+  max-width: 90%;
   margin: 20px auto;
   border-left: 5px solid #90FF5D;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .error {

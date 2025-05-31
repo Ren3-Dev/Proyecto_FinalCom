@@ -3,11 +3,11 @@ MAIN {
   INPUT x;
   INPUT y;
   z = 1 + x;
-  IF (x < y) {
+  IF (x < y && y <> 0) {
     z = x + y;
-  }
-  ELSE {
+  } ELSE {
     z = 0;
   }
   OUTPUT z;
 }
+

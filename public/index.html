@@ -2,29 +2,67 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Compilador Kevin</title>
-  <h1>August_Dev_005</h1>
+  <title>IDE BMLang</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Compilador BMLang</h1>
-  <form id="formulario" enctype="multipart/form-data">
-    <input type="file" name="archivo" accept=".ml" required>
-    <button type="submit">Compilar</button>
-  </form>
+  <h1>IDE BMLang</h1>
+
+  <!-- Abrir archivo -->
+  <input type="file" accept=".ml" onchange="abrirArchivo(event)">
+  <br><br>
+
+  <!-- Editor -->
+  <textarea id="editor" placeholder="Escribí tu código BMLang aquí..."></textarea>
+  <br>
+
+  <!-- Botones -->
+  <button onclick="guardarYCompilar()">Guardar y Compilar</button>
+  <button onclick="guardarArchivo()">Guardar como .ml</button>
+
+  <br><br>
   <pre id="salida"></pre>
 
   <script>
-    document.getElementById('formulario').onsubmit = async function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const res = await fetch('/compilar', {
+    let nombreArchivoCargado = null;
+
+    // Abrir archivo .ml
+    function abrirArchivo(event) {
+      const archivo = event.target.files[0];
+      if (!archivo) return;
+
+      nombreArchivoCargado = archivo.name;
+
+      const lector = new FileReader();
+      lector.onload = function(e) {
+        document.getElementById('editor').value = e.target.result;
+      };
+      lector.readAsText(archivo);
+    }
+
+    // Guardar y compilar
+    function guardarYCompilar() {
+      const contenido = document.getElementById('editor').value;
+      fetch('/guardar_y_compilar', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigo: contenido })
+      })
+      .then(res => res.text())
+      .then(texto => {
+        document.getElementById('salida').textContent = texto;
       });
-      const texto = await res.text();
-      document.getElementById('salida').textContent = texto;
-    };
+    }
+
+    // Guardar como archivo .ml
+    function guardarArchivo() {
+      const contenido = document.getElementById('editor').value;
+      const blob = new Blob([contenido], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = nombreArchivoCargado || 'nuevo_codigo.ml';
+      a.click();
+    }
   </script>
 </body>
 </html>
